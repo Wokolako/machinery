@@ -86,11 +86,28 @@ export type LedgerExample = { original: LedgerEntry; replacement: LedgerEntry };
 
 export class ApiUnavailableError extends Error {}
 
+let warnedDummy = false;
+function warnDummyOnce() {
+  if (warnedDummy) return;
+  warnedDummy = true;
+  console.warn(`[api] ${API_URL} is unreachable; serving dummy data from src/lib/dummy-data.ts.`);
+}
+
 async function get<T>(path: string): Promise<T> {
   let res: Response;
   try {
     res = await fetch(`${API_URL}/api${path}`, { cache: "no-store" });
   } catch {
+    // In development the pages still render without the API, from a copy of
+    // the seed data. Production never substitutes dummy content.
+    if (process.env.NODE_ENV !== "production") {
+      const { dummyResponse } = await import("./dummy-data");
+      const data = dummyResponse(path);
+      if (data !== undefined) {
+        warnDummyOnce();
+        return data as T;
+      }
+    }
     throw new ApiUnavailableError(
       `Couldn't reach the AssetYield API at ${API_URL}. Start it with "npm run dev" in the assetyield-api folder.`,
     );
