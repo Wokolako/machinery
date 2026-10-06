@@ -1,0 +1,945 @@
+/* Shared section styles for every page. Content is held to an 80rem column by
+   padding, so narrow children stay left-aligned. */
+
+/* ---------- Type ---------- */
+
+.h2 {
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  max-width: 22ch;
+  text-wrap: balance;
+}
+
+.h3 {
+  font-stretch: 112%;
+  font-weight: 700;
+  font-size: 1.1875rem;
+  line-height: 1.3;
+}
+
+.lead {
+  color: var(--ink-soft);
+  max-width: 56ch;
+  font-size: 1.125rem;
+}
+
+.body {
+  max-width: var(--measure);
+}
+
+.body + .body {
+  margin-top: 1rem;
+}
+
+.small {
+  margin-top: 2rem;
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  max-width: var(--measure);
+}
+
+.textLink {
+  font-weight: 700;
+  color: var(--sapphire);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+
+.textLink:hover {
+  color: var(--sapphire-deep);
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  padding-block: clamp(4rem, 8vw, 6.5rem);
+  padding-inline: max(var(--gutter), (100% - 80rem) / 2);
+}
+
+.section + .section {
+  border-top: 1px solid var(--rule);
+}
+
+.sectionPaper {
+  background: var(--paper);
+}
+
+.sectionInk {
+  background: var(--ink);
+  color: var(--limestone);
+}
+
+.section + .sectionInk,
+.sectionInk + .section {
+  border-top: 0;
+}
+
+.sectionInk .lead {
+  color: #b6c1c8;
+}
+
+.sectionHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem 4rem;
+  align-items: end;
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.sectionHead:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- Buttons ---------- */
+
+.buttonPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0 1.4rem;
+  background: var(--sapphire);
+  color: var(--paper);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buttonPrimary:hover {
+  background: var(--sapphire-deep);
+}
+
+.buttonText {
+  font-weight: 600;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+}
+
+/* ---------- Home hero ---------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+  padding-block: clamp(3rem, 7vw, 5.5rem) clamp(4rem, 8vw, 6.5rem);
+  padding-inline: max(var(--gutter), (100% - 88rem) / 2);
+}
+
+.heroText {
+  padding-top: 1rem;
+}
+
+/* The one loud moment: the rule itself, set wide like a stamped machine plate. */
+.heroTitle {
+  font-stretch: 125%;
+  font-weight: 900;
+  font-size: clamp(2.6rem, 6.2vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.heroLede {
+  margin-top: 1.75rem;
+  font-size: 1.1875rem;
+  max-width: 44ch;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.heroHint {
+  margin-top: 2.5rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--sapphire);
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+  max-width: 40ch;
+}
+
+.heroRecord {
+  min-width: 0;
+}
+
+.caption {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Home: page index ---------- */
+
+.index {
+  list-style: none;
+  margin-top: 2.5rem;
+  border-top: 2px solid var(--ink);
+}
+
+.indexItem {
+  border-bottom: 1px solid var(--rule);
+}
+
+.indexLink {
+  display: grid;
+  grid-template-columns: minmax(0, 18rem) minmax(0, 1fr) auto;
+  gap: 0.5rem 3rem;
+  align-items: baseline;
+  padding: 1.5rem 0.75rem;
+  margin-inline: -0.75rem;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 150ms ease;
+}
+
+.indexLink:hover {
+  background: var(--paper);
+}
+
+.indexLabel {
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  line-height: 1.15;
+}
+
+.indexSummary {
+  color: var(--ink-soft);
+  max-width: 52ch;
+}
+
+.indexGo {
+  font-weight: 700;
+  font-size: 0.9375rem;
+  color: var(--sapphire);
+  white-space: nowrap;
+}
+
+.indexLink:hover .indexGo {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---------- Shift timeline ---------- */
+
+.timeline {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  position: relative;
+  padding-top: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: calc(1.5rem + 7px);
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--rule-strong);
+}
+
+.tick {
+  position: relative;
+  padding-top: 1.6rem;
+  padding-right: 0.75rem;
+}
+
+.tick::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--limestone);
+  border: 2px solid var(--ink);
+}
+
+.tick[data-kind="scope"]::before {
+  border-radius: 2px;
+  background: var(--ink);
+}
+
+.tick[data-kind="check"]::before {
+  background: var(--sapphire);
+  border-color: var(--sapphire);
+}
+
+.tickTime {
+  display: block;
+  font-weight: 700;
+  font-stretch: 112%;
+}
+
+.tickLabel {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Steps ---------- */
+
+.steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
+}
+
+.step {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  border-top: 3px solid var(--ink);
+  padding-top: 1.25rem;
+}
+
+.step p {
+  color: var(--ink-soft);
+}
+
+.stepNum {
+  font-stretch: 125%;
+  font-weight: 900;
+  font-size: 2.25rem;
+  line-height: 1;
+  color: var(--sapphire);
+}
+
+.pullNote {
+  margin-top: 4rem;
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-weight: 500;
+  line-height: 1.35;
+  max-width: 40ch;
+  text-wrap: pretty;
+}
+
+/* ---------- Evidence tiers ---------- */
+
+.tiers {
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.tierRow {
+  display: grid;
+  grid-template-columns: 14rem minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem 2.5rem;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.stamp {
+  justify-self: start;
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 1.125rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 3px;
+  transform: rotate(-3deg);
+}
+
+.stamp[data-tier="logged"] {
+  color: var(--ink-soft);
+  border: 2px dashed var(--ink-soft);
+}
+
+.stamp[data-tier="approved"] {
+  color: var(--sapphire);
+  border: 2.5px solid var(--sapphire);
+}
+
+.stamp[data-tier="corroborated"] {
+  color: var(--paper);
+  background: var(--sapphire);
+  border: 2.5px solid var(--sapphire);
+}
+
+.tierWho {
+  font-weight: 600;
+}
+
+.tierUse {
+  color: var(--ink-soft);
+}
+
+/* Compact stamp strip used on the home page. */
+.stampStrip {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 0;
+}
+
+.stampStrip li {
+  display: flex;
+  align-items: center;
+}
+
+.stampStrip li + li::before {
+  content: "";
+  width: clamp(1.5rem, 5vw, 4rem);
+  height: 2px;
+  margin-inline: 0.75rem;
+  background: var(--rule-strong);
+}
+
+.routes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.routes dt {
+  font-weight: 700;
+  font-size: 1.0625rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid var(--sapphire);
+}
+
+.routes dd {
+  color: var(--ink-soft);
+}
+
+/* ---------- Definition rows (metrics, commercial terms) ---------- */
+
+.defList {
+  border-top: 2px solid var(--ink);
+}
+
+.defRow {
+  display: grid;
+  grid-template-columns: 18rem minmax(0, 1fr);
+  gap: 0.5rem 3rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.defRow dt {
+  font-weight: 700;
+  font-stretch: 112%;
+}
+
+.defRow dd {
+  color: var(--ink-soft);
+  max-width: var(--measure);
+}
+
+/* ---------- Worked example ---------- */
+
+.example {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.example .h2 + .body {
+  margin-top: 1.5rem;
+}
+
+.ticket {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+.ticketTitle {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.ticketRows {
+  display: grid;
+}
+
+.ticketRows div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px dashed var(--rule);
+}
+
+.ticketRows div:last-child {
+  border-bottom: 0;
+}
+
+.ticketRows dt {
+  color: var(--ink-soft);
+}
+
+.ticketRows dd {
+  font-weight: 700;
+  text-align: right;
+}
+
+.ticketTotal {
+  border-top: 2px solid var(--ink);
+  margin-top: 0.5rem;
+}
+
+/* ---------- Flags ---------- */
+
+.flagTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9875rem;
+}
+
+.flagTable thead th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #b6c1c8;
+  padding: 0 1.5rem 0.75rem 0;
+  border-bottom: 1px solid #4a5963;
+}
+
+.flagTable tbody th,
+.flagTable td {
+  text-align: left;
+  vertical-align: top;
+  padding: 1rem 1.5rem 1rem 0;
+  border-bottom: 1px solid #36444d;
+}
+
+.flagTable tbody th {
+  font-weight: 400;
+  width: 16rem;
+}
+
+.flagTable td:last-child {
+  color: #c9d2d7;
+}
+
+.flagChip {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--ink);
+  background: var(--hivis);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+}
+
+.smallOnInk {
+  margin-top: 2rem;
+  font-size: 0.9375rem;
+  color: #b6c1c8;
+}
+
+/* ---------- Ledger ---------- */
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.split .h2 {
+  margin-bottom: 1.75rem;
+}
+
+.ledger {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.ledgerCaption {
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+
+.entry {
+  border-left: 4px solid var(--sapphire);
+  padding: 0.75rem 1rem;
+  background: var(--limestone);
+  border-radius: 0 4px 4px 0;
+}
+
+.entry[data-state="superseded"] {
+  border-left-color: var(--rule-strong);
+  color: var(--ink-soft);
+}
+
+.entry[data-state="superseded"] .entryLine:first-of-type {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+}
+
+.entryHead {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.entryLine {
+  font-size: 0.9375rem;
+}
+
+.chain {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Roles ---------- */
+
+.roles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 4rem;
+}
+
+.roleRow {
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.roleRow:first-child {
+  grid-column: 1 / -1;
+  border-top: 2px solid var(--ink);
+}
+
+.roleRow:first-child dd {
+  font-size: 1.125rem;
+  color: var(--ink);
+}
+
+.roleRow dt {
+  font-weight: 700;
+  font-stretch: 112%;
+  margin-bottom: 0.35rem;
+}
+
+.roleRow dd {
+  color: var(--ink-soft);
+  max-width: var(--measure);
+}
+
+/* ---------- Call to action band ---------- */
+
+.cta {
+  background: var(--sapphire);
+  color: var(--paper);
+  padding-block: clamp(4rem, 9vw, 7rem);
+  padding-inline: max(var(--gutter), (100% - 80rem) / 2);
+}
+
+.ctaTitle {
+  font-stretch: 125%;
+  font-weight: 900;
+  font-size: clamp(2.25rem, 5.5vw, 4.25rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  max-width: 16ch;
+}
+
+.ctaBody {
+  margin-top: 1.5rem;
+  font-size: 1.1875rem;
+  max-width: 52ch;
+}
+
+.buttonOnBlue {
+  display: inline-flex;
+  align-items: center;
+  min-height: 3rem;
+  margin-top: 2rem;
+  padding: 0 1.4rem;
+  background: var(--paper);
+  color: var(--sapphire-deep);
+  font-weight: 800;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.buttonOnBlue:hover {
+  background: var(--hivis);
+  color: var(--ink);
+}
+
+.buttonOnBlue:focus-visible {
+  outline-color: var(--hivis);
+}
+
+/* ---------- Pilot ---------- */
+
+.pilotGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.checklist {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.checklist + .h2 {
+  margin-top: 3.5rem;
+}
+
+.checklist li {
+  position: relative;
+  padding-left: 1.75rem;
+  max-width: 52ch;
+}
+
+.checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: var(--sapphire);
+  border-radius: 1px;
+}
+
+.form {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  display: grid;
+  gap: 1.25rem;
+}
+
+.formTitle {
+  font-stretch: 112%;
+  font-weight: 800;
+  font-size: 1.375rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.fieldLabel {
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+
+.fieldHint {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+.input {
+  font: inherit;
+  font-size: 1rem;
+  min-height: 2.875rem;
+  padding: 0.55rem 0.75rem;
+  border: 1.5px solid var(--rule-strong);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  width: 100%;
+}
+
+.input:focus-visible {
+  outline-offset: 0;
+  border-color: var(--sapphire);
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 2px var(--hivis);
+}
+
+textarea.input {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.radioGroup {
+  border: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.radioGroup legend {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  margin-bottom: 0.4rem;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.25rem;
+}
+
+.radio input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--sapphire);
+}
+
+.fieldError {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.formNote {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+.formDone {
+  padding: 1rem 1.1rem;
+  border-left: 4px solid var(--sapphire);
+  background: var(--limestone);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1000px) {
+  .hero,
+  .split,
+  .example,
+  .pilotGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .heroText {
+    padding-top: 0;
+  }
+
+  .sectionHead {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tierRow {
+    grid-template-columns: 12rem minmax(0, 1fr);
+  }
+
+  .tierUse {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 860px) {
+  .timeline {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 0;
+    padding-left: 2rem;
+    gap: 1.1rem;
+  }
+
+  .timeline::before {
+    top: 0;
+    bottom: 0;
+    left: 7px;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+
+  .tick {
+    padding-top: 0;
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+  }
+
+  .tick::before {
+    left: -2rem;
+    top: 0.25rem;
+  }
+
+  .steps,
+  .routes,
+  .roles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .defRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .indexLink {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .flagTable thead {
+    display: none;
+  }
+
+  .flagTable,
+  .flagTable tbody,
+  .flagTable tr,
+  .flagTable tbody th,
+  .flagTable td {
+    display: block;
+    width: auto;
+  }
+
+  .flagTable tr {
+    padding: 1rem 0;
+    border-bottom: 1px solid #36444d;
+  }
+
+  .flagTable tbody th,
+  .flagTable td {
+    border: 0;
+    padding: 0.2rem 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .tierRow {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+  }
+
+  .tierUse {
+    grid-column: auto;
+  }
+
+  .stampStrip li + li::before {
+    width: 1rem;
+    margin-inline: 0.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .indexLink {
+    transition: none;
+  }
+}

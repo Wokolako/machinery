@@ -1,0 +1,366 @@
+.record {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 1.5rem;
+  display: grid;
+  gap: 1.25rem;
+  box-shadow: 0 1px 0 var(--rule), 0 18px 40px -28px rgb(30 42 50 / 0.45);
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.sub {
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  max-width: 44ch;
+}
+
+/* The evidence tier as an approval stamp: heavier as the record climbs. */
+.tier {
+  flex-shrink: 0;
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  padding: 0.35rem 0.7rem;
+  border-radius: 3px;
+  transform: rotate(-3deg);
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+
+.tier[data-tier="logged"] {
+  color: var(--ink-soft);
+  border: 1.5px dashed var(--ink-soft);
+}
+
+.tier[data-tier="approved"] {
+  color: var(--sapphire);
+  border: 2px solid var(--sapphire);
+}
+
+.tier[data-tier="corroborated"] {
+  color: var(--paper);
+  background: var(--sapphire);
+  border: 2px solid var(--sapphire);
+}
+
+.gauge {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.gaugeHead {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+}
+
+.multiplier {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.multiplierValue {
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.multiplierLabel {
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+}
+
+.bandNote {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.bandNote[data-state="inside"] {
+  color: var(--sapphire);
+}
+
+.bandNote[data-state="below"],
+.bandNote[data-state="above"] {
+  background: var(--hivis);
+  color: var(--ink);
+  padding: 0.1rem 0.45rem;
+  border-radius: 2px;
+}
+
+.track {
+  position: relative;
+  height: 2.75rem;
+  background: var(--stone);
+  border-radius: 3px;
+}
+
+.band {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: rgb(33 65 143 / 0.14);
+  border-left: 2px solid var(--sapphire);
+  border-right: 2px solid var(--sapphire);
+}
+
+.bandLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8125rem;
+  color: var(--sapphire);
+  font-weight: 600;
+}
+
+.bandSwatch {
+  width: 1rem;
+  height: 0.7rem;
+  background: rgb(33 65 143 / 0.14);
+  border-left: 2px solid var(--sapphire);
+  border-right: 2px solid var(--sapphire);
+}
+
+.marker {
+  position: absolute;
+  top: -0.35rem;
+  bottom: -0.35rem;
+  width: 4px;
+  margin-left: -2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: left 120ms ease-out;
+}
+
+.marker[data-state="below"],
+.marker[data-state="above"] {
+  background: var(--ink);
+  box-shadow: 0 0 0 3px var(--hivis);
+}
+
+.ticks {
+  position: relative;
+  height: 1rem;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.ticks span {
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.ticks span:first-child {
+  transform: none;
+}
+
+.ticks span:last-child {
+  transform: translateX(-100%);
+}
+
+.controls {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  padding: 1rem 0 0;
+  margin: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.legend {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  padding: 0;
+  margin-bottom: 0.25rem;
+}
+
+.controls:disabled .legend {
+  color: var(--sapphire);
+  font-weight: 600;
+}
+
+.control {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.controlLabel {
+  font-size: 0.9375rem;
+}
+
+.control input[type="range"] {
+  width: 100%;
+  accent-color: var(--sapphire);
+  min-height: 1.75rem;
+}
+
+.controls:disabled .control {
+  opacity: 0.55;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--rule);
+  padding-top: 1rem;
+  gap: 0.75rem;
+}
+
+.metrics dt {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+}
+
+.metrics dd {
+  margin: 0.15rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-stretch: 112%;
+}
+
+.split {
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+  margin-top: -0.5rem;
+}
+
+.flags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.flag {
+  font-size: 0.875rem;
+  line-height: 1.45;
+  padding: 0.6rem 0.75rem 0.6rem 0.9rem;
+  background: rgb(243 198 19 / 0.16);
+  border-left: 6px solid transparent;
+  border-image: repeating-linear-gradient(
+      -45deg,
+      var(--hivis) 0 6px,
+      var(--ink) 6px 12px
+    )
+    1;
+}
+
+.flagCode {
+  display: block;
+  font-weight: 700;
+  font-size: 0.8125rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.noteField {
+  flex-basis: 100%;
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.875rem;
+}
+
+.noteField textarea {
+  font: inherit;
+  font-size: 0.9375rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--ink);
+  resize: vertical;
+}
+
+.noteField textarea[aria-invalid="true"] {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 2px var(--hivis);
+}
+
+.error {
+  font-weight: 600;
+}
+
+.primary,
+.secondary {
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  min-height: 2.75rem;
+  padding: 0 1.1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.primary {
+  background: var(--sapphire);
+  color: var(--paper);
+  border: 2px solid var(--sapphire);
+}
+
+.primary:hover {
+  background: var(--sapphire-deep);
+  border-color: var(--sapphire-deep);
+}
+
+.secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--rule-strong);
+}
+
+.secondary:hover {
+  border-color: var(--ink);
+}
+
+.done {
+  flex-basis: 100%;
+  font-size: 0.9375rem;
+  color: var(--sapphire);
+  font-weight: 600;
+}
+
+@media (max-width: 560px) {
+  .record {
+    padding: 1.1rem;
+  }
+
+  .head {
+    flex-direction: column-reverse;
+  }
+
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker,
+  .tier {
+    transition: none;
+  }
+}

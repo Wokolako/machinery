@@ -1,0 +1,175 @@
+/* ---------- Page intro ---------- */
+
+.intro {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 1.5rem 4rem;
+  align-items: end;
+  padding-block: clamp(3.5rem, 8vw, 6.5rem) clamp(3rem, 6vw, 4.5rem);
+  padding-inline: max(var(--gutter), (100% - 80rem) / 2);
+  border-bottom: 1px solid var(--rule);
+}
+
+.introTitle {
+  font-stretch: 125%;
+  font-weight: 900;
+  font-size: clamp(2.4rem, 5.6vw, 4.5rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.introBody {
+  font-size: 1.1875rem;
+  color: var(--ink-soft);
+  max-width: 46ch;
+}
+
+.introBody p + p {
+  margin-top: 0.75rem;
+}
+
+/* ---------- Pager ---------- */
+
+.pager {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: 1rem;
+  padding-block: 3rem;
+  padding-inline: max(var(--gutter), (100% - 80rem) / 2);
+  border-top: 1px solid var(--rule);
+}
+
+.pagerLink {
+  display: grid;
+  align-content: start;
+  gap: 0.2rem;
+  padding: 1.25rem 1.5rem;
+  border: 1.5px solid var(--rule-strong);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.pagerLink:hover {
+  border-color: var(--sapphire);
+  background: var(--paper);
+}
+
+.pagerLink[data-dir="next"] {
+  grid-column: 2;
+  text-align: right;
+  border-color: var(--sapphire);
+}
+
+.pagerLink[data-dir="next"]:hover {
+  background: var(--sapphire);
+  color: var(--paper);
+}
+
+.pagerLink[data-dir="next"]:hover .pagerDir,
+.pagerLink[data-dir="next"]:hover .pagerSummary {
+  color: rgb(251 252 252 / 0.85);
+}
+
+.pagerDir {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+
+.pagerLabel {
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
+  line-height: 1.15;
+}
+
+.pagerSummary {
+  font-size: 0.9375rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  background: var(--ink);
+  color: #c9d2d7;
+  padding-block: 3.5rem 2.5rem;
+  padding-inline: max(var(--gutter), (100% - 80rem) / 2);
+}
+
+.footerTop {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem 4rem;
+}
+
+.footerMark {
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: var(--paper);
+}
+
+.footerMark span {
+  color: #8fa8e6;
+}
+
+.footerLine {
+  margin-top: 0.5rem;
+  max-width: 36ch;
+  font-size: 0.9375rem;
+}
+
+.footerLinks {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 0.6rem 3rem;
+  font-size: 0.9375rem;
+}
+
+.footerLinks a {
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.footerLinks a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.footerLinks a:focus-visible {
+  outline-color: #8fa8e6;
+}
+
+.footerSmall {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #36444d;
+  font-size: 0.8125rem;
+  color: #9fadb6;
+}
+
+@media (max-width: 860px) {
+  .intro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pager {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .pagerLink[data-dir="next"] {
+    grid-column: auto;
+    grid-row: 1;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pagerLink {
+    transition: none;
+  }
+}
