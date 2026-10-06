@@ -3,9 +3,15 @@ import { z } from "zod";
 // All environment access goes through here, validated once at startup.
 const schema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
-  DATABASE_URL: z
-    .string({ message: "DATABASE_URL is not set. Copy .env.example to .env and fill it in." })
-    .url({ message: "DATABASE_URL must be a postgres:// connection URL." }),
+  // Optional so the API still boots without a database: every query then
+  // answers 503 and the website falls back to its dummy data.
+  DATABASE_URL: z.string().url({ message: "DATABASE_URL must be a postgres:// connection URL." }).optional(),
+  // Direct (non-pooler) URL, as Neon provides it. Preferred when set: Neon's
+  // pooler rejects the search_path startup option the pool relies on.
+  DATABASE_URL_UNPOOLED: z
+    .string()
+    .url({ message: "DATABASE_URL_UNPOOLED must be a postgres:// connection URL." })
+    .optional(),
   HOST: z.string().default("127.0.0.1"),
   PORT: z.coerce.number().int().min(1).max(65535).default(4000),
   // Optional. When unset, admin endpoints answer 503 instead of being open.

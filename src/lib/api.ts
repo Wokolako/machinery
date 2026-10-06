@@ -2,10 +2,16 @@ import "server-only";
 import { cache } from "react";
 import { connection } from "next/server";
 
-// Every piece of content on the site comes from the AssetYield API, which
-// reads it from PostgreSQL. Requests are never cached, so a change in the
-// database shows on the next page load.
-const API_URL = process.env.API_URL ?? "http://127.0.0.1:4000";
+// Content comes from the AssetYield API (PostgreSQL) when API_URL is set and
+// the API answers; otherwise from src/lib/dummy-data.ts, a copy of the seed
+// data, so the site runs on its own. API requests are never cached, so a
+// change in the database shows on the next page load.
+// On Vercel, API_URL is injected by the app service's binding to the api
+// service (see vercel.json); locally it comes from .env.local.
+const API_URL = process.env.API_URL;
+
+// The API mounts every route under /api.
+const apiUrl = (path: string) => new URL(`api${path}`, API_URL);
 
 export type SitePage = {
   slug: string;
@@ -88,34 +94,35 @@ export type LedgerExample = { original: LedgerEntry; replacement: LedgerEntry };
 export class ApiUnavailableError extends Error {}
 
 let warnedDummy = false;
-function warnDummyOnce() {
+function warnDummyOnce(why: string) {
   if (warnedDummy) return;
   warnedDummy = true;
-  console.warn(`[api] ${API_URL} is unreachable; serving dummy data from src/lib/dummy-data.ts.`);
+  console.warn(`[api] ${why}; serving dummy data from src/lib/dummy-data.ts.`);
+}
+
+// The API (or its database) being down is not a reason to take the site down.
+async function getDummy<T>(path: string, why: string): Promise<T> {
+  const { dummyResponse } = await import("./dummy-data");
+  const data = dummyResponse(path);
+  if (data === undefined) {
+    throw new ApiUnavailableError(`${why}, and there is no dummy data for ${path}.`);
+  }
+  warnDummyOnce(why);
+  return data as T;
 }
 
 async function get<T>(path: string): Promise<T> {
   // Render per request rather than at build time, so the build never needs
   // the API running and pages always show current data.
   await connection();
+  if (!API_URL) return getDummy<T>(path, "API_URL is not set");
   let res: Response;
   try {
-    res = await fetch(`${API_URL}/api${path}`, { cache: "no-store" });
+    res = await fetch(apiUrl(path), { cache: "no-store" });
   } catch {
-    // In development the pages still render without the API, from a copy of
-    // the seed data. Production never substitutes dummy content.
-    if (process.env.NODE_ENV !== "production") {
-      const { dummyResponse } = await import("./dummy-data");
-      const data = dummyResponse(path);
-      if (data !== undefined) {
-        warnDummyOnce();
-        return data as T;
-      }
-    }
-    throw new ApiUnavailableError(
-      `Couldn't reach the AssetYield API at ${API_URL}. Start it with "npm run dev" in the assetyield-api folder.`,
-    );
+    return getDummy<T>(path, `${API_URL} is unreachable`);
   }
+  if (res.status >= 500) return getDummy<T>(path, `The API returned ${res.status}`);
   if (!res.ok) {
     throw new Error(`The API returned ${res.status} for ${path}.`);
   }
@@ -162,9 +169,15 @@ export async function createPilotRequest(
   input: PilotRequestInput,
   clientIp?: string,
 ): Promise<PilotRequestResult> {
+  // Saving needs the API and its database; dummy data has nowhere to put it.
+  const notSaved: PilotRequestResult = {
+    ok: false,
+    errors: { form: "This site is running on demo data, so requests can't be saved right now." },
+  };
+  if (!API_URL) return notSaved;
   let res: Response;
   try {
-    res = await fetch(`${API_URL}/api/pilot-requests`, {
+    res = await fetch(apiUrl("/pilot-requests"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -174,7 +187,7 @@ export async function createPilotRequest(
       cache: "no-store",
     });
   } catch {
-    return { ok: false, errors: { form: "The server couldn't be reached. Try again in a minute." } };
+    return notSaved;
   }
   if (res.status === 400) {
     const data = (await res.json()) as ApiErrorBody;

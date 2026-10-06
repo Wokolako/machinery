@@ -12,7 +12,8 @@ export function createApp() {
   app.disable("x-powered-by");
   // The website's server sits in front of the API on the same machine; trust
   // X-Forwarded-For only from loopback so rate limiting sees the real client.
-  app.set("trust proxy", "loopback");
+  // On Vercel every request arrives through Vercel's proxy, which sets it.
+  app.set("trust proxy", process.env.VERCEL ? true : "loopback");
 
   app.use(requestId);
   app.use(requestLogger);
