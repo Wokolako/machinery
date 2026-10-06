@@ -1,5 +1,6 @@
 import "server-only";
 import { cache } from "react";
+import { connection } from "next/server";
 
 // Every piece of content on the site comes from the AssetYield API, which
 // reads it from PostgreSQL. Requests are never cached, so a change in the
@@ -87,6 +88,9 @@ export type LedgerExample = { original: LedgerEntry; replacement: LedgerEntry };
 export class ApiUnavailableError extends Error {}
 
 async function get<T>(path: string): Promise<T> {
+  // Render per request rather than at build time, so the build never needs
+  // the API running and pages always show current data.
+  await connection();
   let res: Response;
   try {
     res = await fetch(`${API_URL}/api${path}`, { cache: "no-store" });
