@@ -1,0 +1,21 @@
+{
+  "name": "assetyield-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AssetYield website API backed by PostgreSQL 13",
+  "type": "module",
+  "engines": {
+    "node": ">=20.6"
+  },
+  "scripts": {
+    "dev": "node --env-file=.env --watch src/server.js",
+    "start": "node --env-file=.env src/server.js",
+    "db:setup": "node --env-file=.env db/setup.js",
+    "test": "node --test \"test/**/*.test.js\""
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "pg": "^8.23.1",
+    "zod": "^4.6.5"
+  }
+}
